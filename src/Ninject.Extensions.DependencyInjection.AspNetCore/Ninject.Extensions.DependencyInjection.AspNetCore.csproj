@@ -11,6 +11,10 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>../../Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
         <Configurations>Debug;Release</Configurations>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,6 +24,10 @@
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Ninject.Web.Common" Version="3.3.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
     </ItemGroup>
 
 </Project>
