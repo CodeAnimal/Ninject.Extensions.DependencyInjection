@@ -18,14 +18,26 @@ using Integration.Net5;
 
 namespace Ninject.Extensions.DependencyInjection.Integration.Test;
 
-public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
-{
+#if NET7_0
+    public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+#else
+    public class IntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
+#endif
+    {
+#if NET7_0
+    public IntegrationTests(WebApplicationFactory<Program> appFactory)
+#else
     public IntegrationTests(WebApplicationFactory<Startup> appFactory)
+#endif
     {
         AppFactory = appFactory;
     }
 
+#if NET7_0
+    public WebApplicationFactory<Program> AppFactory { get; }
+#else
     public WebApplicationFactory<Startup> AppFactory { get; }
+#endif
 
     [Fact]
     public async Task GetString()

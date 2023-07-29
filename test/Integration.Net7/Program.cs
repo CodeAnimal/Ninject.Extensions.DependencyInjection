@@ -1,16 +1,33 @@
-using System.Threading.Tasks;
+using Integration.Net7.Services;
+using Integration.Net7.Services.Abstractions;
+using Microsoft.AspNetCore.Builder;
 using Ninject.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ninject;
 
-namespace Integration.Net7;
+var builder = WebApplication.CreateBuilder(args);
 
-public static class Program
-{
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .UseServiceProviderFactory(new NinjectServiceProviderFactory())
-            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+builder.Host
+    .UseServiceProviderFactory(new NinjectServiceProviderFactory())
+    .ConfigureContainer<IKernel>(kernel =>
+    {
+        kernel.Bind<IServiceB>().To<ServiceB>();
+    });
 
-    public static async Task Main(string[] args) => await CreateHostBuilder(args).Build().RunAsync().ConfigureAwait(false);
-}
+builder.Services
+    .AddTransient<IServiceA, ServiceA>()
+    .AddTransient<IScopeTestService, ScopeTestService>()
+    .AddScoped<IScopedService, ScopedService>();
+        
+builder.Services.AddMvc();
+
+
+var app = builder.Build();
+
+app.UseRouting()
+    .UseEndpoints(endpoints => endpoints.MapControllers());
+
+await app.RunAsync().ConfigureAwait(false);
+
+public abstract partial class Program {}
