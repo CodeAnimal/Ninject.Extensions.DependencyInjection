@@ -4,6 +4,9 @@
     <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AnalysisMode>Recommended</AnalysisMode>
+    <AssemblyOriginatorKeyFile>../../Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
+    <IsPackable>false</IsPackable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

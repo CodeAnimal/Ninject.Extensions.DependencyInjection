@@ -4,6 +4,13 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <ImplicitUsings>false</ImplicitUsings>
+        <Authors>CodeAnimal</Authors>
+        <Copyright>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</Copyright>
+        <RepositoryUrl>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>../../Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
+        <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
