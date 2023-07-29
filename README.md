@@ -1,17 +1,17 @@
-# This repo is based on https://github.com/lord-executor/Ninject.Web.AspNetCore which has the original work.
-
+# Ninject.Extensions.DependencyInjection
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/blob/main/LICENSE) [![CI](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml/badge.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml)
 
+## Overview
+**This repo is based on https://github.com/lord-executor/Ninject.Web.AspNetCore which has the original work.**
 
-# Overview
 This project provides full [Ninject](https://github.com/ninject/Ninject) integration with ASP.NET Core projects. Full integration means that the Ninject kernel is used to replace the standard service provider that comes with ASP.NET Core.
 
-* [Ninject.Extensions.DependencyInject](https://www.nuget.org/packages/Ninject.Extensions.DependencyInjection/)
+* [Ninject.Extensions.DependencyInjection](https://www.nuget.org/packages/Ninject.Extensions.DependencyInjection/)
 * [Ninject.Extensions.DependencyInjection.AspNetCore](https://www.nuget.org/packages/Ninject.Extensions.DependencyInjection.AspNetCore/) - this is only required if you use `.InRequestScope()`.
 
-# Examples
+## Examples
 
-## Simple Program.cs
+### Simple Program.cs
 ```csharp
 using Microsoft.AspNetCore.Builder;
 using Ninject.Extensions.DependencyInjection;
@@ -43,7 +43,7 @@ app.UseRouting()
 await app.RunAsync().ConfigureAwait(false);
 ```
 
-## With Startup.cs file
+### With Startup.cs file
 ```csharp
 public class Startup
 {
