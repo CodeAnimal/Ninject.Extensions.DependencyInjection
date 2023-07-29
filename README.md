@@ -6,8 +6,8 @@
 # Overview
 This project provides full [Ninject](https://github.com/ninject/Ninject) integration with ASP.NET Core projects. Full integration means that the Ninject kernel is used to replace the standard service provider that comes with ASP.NET Core.
 
-* Ninject.Extensions.DependencyInject
-* Ninject.Extensions.DependencyInjection.AspNetCore - this is only required if you use `.InRequestScope()`.
+* [Ninject.Extensions.DependencyInject](https://www.nuget.org/packages/Ninject.Extensions.DependencyInjection/)
+* [Ninject.Extensions.DependencyInjection.AspNetCore](https://www.nuget.org/packages/Ninject.Extensions.DependencyInjection.AspNetCore/) - this is only required if you use `.InRequestScope()`.
 
 # Examples
 
