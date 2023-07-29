@@ -7,11 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ninject.Extensions.DependencyInjection\Ninject.Extensions.DependencyInjection.csproj" />
+        <ProjectReference Include="..\Ninject.Extensions.DependencyInjection\Ninject.Extensions.DependencyInjection.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ninject.Web.Common" Version="3.3.2" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Ninject.Web.Common" Version="3.3.2" />
     </ItemGroup>
 
 </Project>
