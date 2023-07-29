@@ -7,7 +7,7 @@
     <RepositoryType>git</RepositoryType>
     <Authors>lord-executor</Authors>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
@@ -16,6 +16,13 @@
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="Ninject.Web.Common" Version="3.3.2" />
     <PackageReference Include="Ninject.Web.Common.SelfHost" Version="3.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Ninject.Extensions.DependencyInjection.snk" />
+    <None Include="..\..\Ninject.Extensions.DependencyInjection.snk">
+      <Link>Ninject.Extensions.DependencyInjection.snk</Link>
+    </None>
   </ItemGroup>
 
 </Project>
