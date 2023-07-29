@@ -1,6 +1,6 @@
 # This repo is based on https://github.com/lord-executor/Ninject.Web.AspNetCore which has the original work.
 
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/blob/main/LICENSE) [![.NET 7 CI](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml/badge.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/blob/main/LICENSE) [![CI](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml/badge.svg)](https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection/actions/workflows/ci.yml)
 
 
 # Overview
