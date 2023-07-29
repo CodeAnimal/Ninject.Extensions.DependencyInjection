@@ -3,3 +3,6 @@ root = true
 [*.cs]
 indent_style = space
 indent_size = 4
+
+dotnet_diagnostic.CA2007.severity = none
+dotnet_diagnostic.CA1852.severity = none

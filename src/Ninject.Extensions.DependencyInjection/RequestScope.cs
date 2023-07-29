@@ -17,7 +17,7 @@ namespace Ninject.Extensions.DependencyInjection
 			}
 			else
 			{
-				throw new ApplicationException("Nesting of RequestScope is not allowed.");
+				throw new InvalidOperationException("Nesting of RequestScope is not allowed.");
 			}
 		}
 

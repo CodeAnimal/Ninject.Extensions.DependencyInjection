@@ -5,7 +5,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 {
 	public class ActivationEntry : IActivationEntry
 	{
-		private static long _counter = 0;
+		private static long counter;
 
 		public ReferenceEqualWeakReference Reference { get; }
 		public long Order { get; }
@@ -18,7 +18,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 			// were to create 10 million (10^7) service instances _per second_ consistently and
 			// uninterrupted, the long would still last roughly 29'227 years before overflowing.
 			// Soooo.... this should be safe enough to guarantee the correct disposal order.
-			Order = Interlocked.Increment(ref _counter);
+			Order = Interlocked.Increment(ref counter);
 		}
 	}
 }

@@ -20,30 +20,30 @@ namespace Ninject.Extensions.DependencyInjection
 	/// </summary>
 	public class NinjectServiceProvider : IServiceProvider, ISupportRequiredService, IDisposable
 	{
-		private readonly IResolutionRoot _resolutionRoot;
-		private readonly IServiceScope _scope;
+		private readonly IResolutionRoot resolutionRoot;
+		private readonly IServiceScope scope;
 
 		public NinjectServiceProvider(IResolutionRoot resolutionRoot, IServiceScope scope)
 		{
-			_resolutionRoot = resolutionRoot;
-			_scope = scope;
+			this.resolutionRoot = resolutionRoot;
+			this.scope = scope;
 		}
 
 		public object GetRequiredService(Type serviceType)
 		{
-			var result = _resolutionRoot.Get(serviceType);
+			var result = resolutionRoot.Get(serviceType);
 			return result;
 		}
 
 		public object GetService(Type serviceType)
 		{
-			var result = _resolutionRoot.TryGet(serviceType);
+			var result = resolutionRoot.TryGet(serviceType);
 			return result;
 		}
 
-		public void Dispose()
-		{
-			_scope?.Dispose();
+        public void Dispose()
+        {
+			scope?.Dispose();
 		}
 	}
 }

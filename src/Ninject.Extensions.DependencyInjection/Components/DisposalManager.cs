@@ -22,8 +22,8 @@ namespace Ninject.Extensions.DependencyInjection.Components
 	/// </summary>
 	public class DisposalManager : NinjectComponent, IDisposalManager
 	{
-		private readonly IActivationCacheAccessor _cacheAccessor;
-		private readonly AsyncLocal<IDisposalCollectorArea> _area = new AsyncLocal<IDisposalCollectorArea>();
+		private readonly IActivationCacheAccessor cacheAccessor;
+		private readonly AsyncLocal<IDisposalCollectorArea> area = new AsyncLocal<IDisposalCollectorArea>();
 
 		public DisposalManager(IActivationCache activationCache)
 		{
@@ -32,17 +32,17 @@ namespace Ninject.Extensions.DependencyInjection.Components
 				throw new ArgumentNullException(nameof(activationCache));
 			}
 
-			if (!(activationCache is IActivationCacheAccessor))
+			if (activationCache is not IActivationCacheAccessor activationCacheAccessor)
 			{
-				throw new ArgumentException(nameof(activationCache), "DisposalManager expects the activation cache to also implement IActivationCacheAccessor");
+                throw new ArgumentException("DisposalManager expects the activation cache to also implement IActivationCacheAccessor", nameof(activationCache));
 			}
 
-			_cacheAccessor = activationCache as IActivationCacheAccessor;
+			cacheAccessor = activationCacheAccessor;
 		}
 
 		public void RemoveInstance(InstanceReference instanceReference)
 		{
-			(_area.Value as IDisposalCollector ?? ImmediateDisposal.Instance).Register(_cacheAccessor.GetEntry(instanceReference.Instance));
+			(area.Value as IDisposalCollector ?? ImmediateDisposal.Instance).Register(cacheAccessor.GetEntry(instanceReference.Instance));
 		}
 
 		/// <summary>
@@ -54,17 +54,17 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// at any point in time.</returns>
 		public IList<ReferenceEqualWeakReference> GetActiveReferences()
 		{
-			return _cacheAccessor.GetAllEntries().Select(entry => entry.Reference).ToList();
+			return cacheAccessor.GetAllEntries().Select(entry => entry.Reference).ToList();
 		}
 
 		public IDisposalCollectorArea CreateArea()
 		{
-			if (_area.Value == null)
+			if (area.Value == null)
 			{
-				return _area.Value = new OrderedAggregateDisposalArea(this);
+				return area.Value = new OrderedAggregateDisposalArea(this);
 			}
 
-			return new InnerDisposalArea(_area.Value);
+			return new InnerDisposalArea(area.Value);
 		}
 
 		#region IDisposalCollectorArea Implementations
@@ -76,35 +76,35 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </summary>
 		private class OrderedAggregateDisposalArea : IDisposalCollectorArea
 		{
-			private readonly DisposalManager _manager;
-			private IList<IActivationEntry> _disposals = new List<IActivationEntry>();
+			private readonly DisposalManager manager;
+			private IList<IActivationEntry> disposals = new List<IActivationEntry>();
 
 			public OrderedAggregateDisposalArea(DisposalManager manager)
 			{
-				_manager = manager;
+				this.manager = manager;
 			}
 
 			public void Dispose()
 {
-				if (_disposals == null || _disposals.Count == 0)
+				if (disposals == null || disposals.Count == 0)
 				{
 					return;
 				}
 
-				foreach (var candidate in _disposals.OrderByDescending(entry => entry.Order))
+				foreach (var candidate in disposals.OrderByDescending(entry => entry.Order))
 				{
 					(candidate.Reference.Target as IDisposable)?.Dispose();
 				}
 
-				_manager._area.Value = null;
-				_disposals = null;
+				manager.area.Value = null;
+				disposals = null;
 			}
 
 			public void Register(IActivationEntry activationEntry)
 			{
 				if (activationEntry != null)
 				{
-					_disposals.Add(activationEntry);
+					disposals.Add(activationEntry);
 				}
 			}
 		}
@@ -129,11 +129,11 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </summary>
 		private class InnerDisposalArea : IDisposalCollectorArea
 		{
-			private readonly IDisposalCollectorArea _parent;
+			private readonly IDisposalCollectorArea parent;
 
 			public InnerDisposalArea(IDisposalCollectorArea parent)
 			{
-				_parent = parent;
+				this.parent = parent;
 			}
 
 			public void Dispose()
@@ -143,7 +143,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 
 			public void Register(IActivationEntry activationEntry)
 			{
-				_parent.Register(activationEntry);
+				parent.Register(activationEntry);
 			}
 		}
 

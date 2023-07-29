@@ -13,11 +13,11 @@ namespace Ninject.Extensions.DependencyInjection
 	{
 		public override void Load()
 		{
-			Kernel.Components.Add<INinjectHttpApplicationPlugin, AspNetCoreApplicationPlugin>(); // provides the scope object for InRequestScope bindings
-			Kernel.Bind<IServiceScopeFactory>().ToConstant(Kernel as IServiceScopeFactory);
+            Kernel!.Components.Add<INinjectHttpApplicationPlugin, AspNetCoreApplicationPlugin>(); // provides the scope object for InRequestScope bindings
+			Kernel.Bind<IServiceScopeFactory>().ToConstant((IServiceScopeFactory) Kernel);
 			// FixServicesForPublicatonAdapter can only work when it is used through the AspNetCoreHostConfiguration mechanism which is not always used
 			// like for example in the context of a Blazor application.
-			Kernel.Bind<IPopulateAdapter>().To<ControllerActivationAdapter>().When(request => Kernel.GetBindings(typeof(AspNetCoreHostConfiguration)).Count() > 0);
+			Kernel.Bind<IPopulateAdapter>().To<ControllerActivationAdapter>().When(request => Kernel.GetBindings(typeof(AspNetCoreHostConfiguration)).Any());
 		}
 	}
 }

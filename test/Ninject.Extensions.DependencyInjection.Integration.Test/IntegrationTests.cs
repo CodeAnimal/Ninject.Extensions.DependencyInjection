@@ -1,6 +1,3 @@
-// Copyright (c) Autofac Project. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -42,12 +39,13 @@ namespace Ninject.Extensions.DependencyInjection.Integration.Test;
     [Fact]
     public async Task GetString()
     {
+        // Arrange
         var client = AppFactory.CreateClient();
 
-
+        // Act
         var response = await client.GetAsync(new Uri("/Test", UriKind.Relative)).ConfigureAwait(false);
 
-
+        // Assert
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         Assert.Equal(10, content.Length);
@@ -56,12 +54,13 @@ namespace Ninject.Extensions.DependencyInjection.Integration.Test;
     [Fact]
     public async Task ScopeTest()
     {
+        // Arrange
         var client = AppFactory.CreateClient();
 
-
+        // Act
         var response = await client.GetAsync(new Uri("/ScopeTest", UriKind.Relative)).ConfigureAwait(false);
 
-
+        // Assert
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         Assert.Equal("true", content);

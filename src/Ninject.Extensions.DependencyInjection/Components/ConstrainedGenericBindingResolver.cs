@@ -45,7 +45,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </summary>
 		/// <returns><c>true</c> if and only if the bound open generic type can be used to create an instance compatible with the requested type</returns>
 		/// <exception cref="ArgumentException">Thrown if the bound type is not a generic type definition</exception>
-		public bool SatisfiesGenericTypeConstraints(Type requestedType, Type boundType)
+		public static bool SatisfiesGenericTypeConstraints(Type requestedType, Type boundType)
 		{
 			if (!boundType.IsGenericTypeDefinition)
 			{

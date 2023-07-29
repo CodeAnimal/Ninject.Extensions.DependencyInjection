@@ -6,13 +6,9 @@
     <AssemblyOriginatorKeyFile>../../Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <Nullable>enable</Nullable>
-<!--    <CodeAnalysisRuleSet>../../build/Test.ruleset</CodeAnalysisRuleSet>-->
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <LangVersion>11</LangVersion>
   </PropertyGroup>
-<!--  <ItemGroup>-->
-<!--    <AdditionalFiles Include="..\..\build\stylecop.json" Link="stylecop.json" />-->
-<!--  </ItemGroup>-->
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ninject.Extensions.DependencyInjection\Ninject.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
@@ -20,9 +16,5 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-<!--    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">-->
-<!--      <PrivateAssets>all</PrivateAssets>-->
-<!--      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
-<!--    </PackageReference>-->
   </ItemGroup>
 </Project>

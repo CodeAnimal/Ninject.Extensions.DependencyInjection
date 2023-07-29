@@ -6,17 +6,17 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
 {
 	public class AspNetCoreHostConfiguration : IAspNetCoreHostConfiguration
 	{
-		private Type _customStartup;
-		private Action<IWebHostBuilder> _hostingModelConfigurationAction;
+		private Type customStartup;
+		private Action<IWebHostBuilder> hostingModelConfigurationAction;
 
 		internal Func<IWebHostBuilder> WebHostBuilderFactory { get; private set; }
-		internal bool BlockOnStart { get; private set; } = false;
+		internal bool BlockOnStart { get; private set; }
 		internal CancellationToken CancellationToken { get; private set; }
 		internal Type CustomControllerActivator { get; private set; }
 
 		public AspNetCoreHostConfiguration(string[] cliArgs = null)
 		{
-			_customStartup = typeof(EmptyStartup);
+			customStartup = typeof(EmptyStartup);
 			WebHostBuilderFactory = () => new DefaultWebHostConfiguration(cliArgs).ConfigureAll().GetBuilder();
 		}
 
@@ -31,12 +31,12 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
 			{
 				throw new ArgumentException("Startup type must inherit from " + nameof(AspNetCoreStartupBase));
 			}
-			_customStartup = startupType;
+			customStartup = startupType;
 		}
 
 		void IAspNetCoreHostConfiguration.ConfigureHostingModel(Action<IWebHostBuilder> configureAction)
 		{
-			_hostingModelConfigurationAction = configureAction;
+			hostingModelConfigurationAction = configureAction;
 		}
 
 		void IAspNetCoreHostConfiguration.ConfigureStartupBehavior(bool blockOnStart, CancellationToken cancellationToken)
@@ -47,8 +47,8 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
 
 		internal virtual void Apply(IWebHostBuilder builder)
 		{
-			_hostingModelConfigurationAction?.Invoke(builder);
-			builder.UseStartup(_customStartup);
+			hostingModelConfigurationAction?.Invoke(builder);
+			builder.UseStartup(customStartup);
 		}
 
 		void IAspNetCoreHostConfiguration.ConfigureCustomControllerActivator(Type controllerActivatorType)

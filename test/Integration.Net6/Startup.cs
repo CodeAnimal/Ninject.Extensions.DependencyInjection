@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Integration.Net6;
 
 [SuppressMessage("CA1052", "CA1052", Justification = "Startup must not be a static class.")]
+[SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Startup will always be given valid arguments.")]
 public class Startup
 {
     public static void Configure(IApplicationBuilder app)

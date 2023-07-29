@@ -37,18 +37,10 @@ namespace Ninject.Extensions.DependencyInjection
 			}
 		}
 
-		private bool UsedCustomBinding(IKernel kernel, List<IPopulateAdapter> adapters, ServiceDescriptor descriptor)
-		{
-			foreach (var adapter in adapters)
-			{
-				if (adapter.AdaptDescriptor(kernel, descriptor))
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
+		private static bool UsedCustomBinding(IKernel kernel, List<IPopulateAdapter> adapters, ServiceDescriptor descriptor)
+        {
+            return adapters.Any(adapter => adapter.AdaptDescriptor(kernel, descriptor));
+        }
 
 		private IBindingWithOrOnSyntax<T> ConfigureImplementationAndLifecycle<T>(
 			IBindingToSyntax<T> bindingToSyntax,
@@ -81,7 +73,7 @@ namespace Ninject.Extensions.DependencyInjection
 				.WithMetadata(nameof(BindingIndex), bindingIndex.Next(descriptor.ServiceType));
 		}
 
-		private IBindingNamedWithOrOnSyntax<T> ConfigureLifecycle<T>(
+		private static IBindingNamedWithOrOnSyntax<T> ConfigureLifecycle<T>(
 			IBindingInSyntax<T> bindingInSyntax,
 			ServiceLifetime lifecycleKind)
 		{
@@ -90,9 +82,7 @@ namespace Ninject.Extensions.DependencyInjection
 				case ServiceLifetime.Singleton:
 					// Microsoft.Extensions.DependencyInjection expects its singletons to be disposed when the root service scope
 					// and/or the root IServiceProvider is disposed.
-					return bindingInSyntax.InScope(context => {
-						return (context.Kernel as NetCoreKernel).RootScope;
-					});
+					return bindingInSyntax.InScope(context => ((NetCoreKernel)context.Kernel).RootScope);
 				case ServiceLifetime.Scoped:
 					return bindingInSyntax.InRequestScope();
 				case ServiceLifetime.Transient:

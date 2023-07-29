@@ -23,7 +23,9 @@ namespace Integration.Net7.Controllers
             var beforeScopedService = serviceProvider.GetRequiredService<IScopedService>();
             var beforeScopeTestService = serviceProvider.GetRequiredService<IScopeTestService>();
             
+#pragma warning disable 
             await using var scope = serviceProvider.CreateAsyncScope();
+#pragma warning restore CA2007
             
             var scopedService = scope.ServiceProvider.GetRequiredService<IScopedService>();
             var scopeTestService = scope.ServiceProvider.GetRequiredService<IScopeTestService>();
