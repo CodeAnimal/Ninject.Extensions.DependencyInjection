@@ -7,18 +7,18 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class ServiceProviderScopeParameter : Parameter
 	{
-		private readonly NinjectServiceScope _scope;
-		private readonly IList<TransientScope> _children = new List<TransientScope>();
+		private readonly NinjectServiceScope scope;
+		private readonly IList<TransientScope> children = new List<TransientScope>();
 
-		public IServiceProvider SourceServiceProvider => _scope.ServiceProvider;
+		public IServiceProvider SourceServiceProvider => scope.ServiceProvider;
 
 		public ServiceProviderScopeParameter(NinjectServiceScope scope)
 			: base(nameof(ServiceProviderScopeParameter), scope, true)
 		{
-			_scope = scope;
-			_scope.Disposed += (_, _) =>
+			this.scope = scope;
+			this.scope.Disposed += (_, _) =>
 			{
-				foreach (var child in _children)
+				foreach (var child in children)
 				{
 					child.Dispose();
 				}
@@ -28,7 +28,7 @@ namespace Ninject.Extensions.DependencyInjection
 		public DisposableObject DeriveTransientScope()
 		{
 			var child = new TransientScope();
-			_children.Add(child);
+			children.Add(child);
 			return child;
 		}
 

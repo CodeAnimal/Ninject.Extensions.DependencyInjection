@@ -17,7 +17,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// 
 		/// It also eliminates the need for explicit locking since the conditional weak table is thread safe already.
 		/// </summary>
-		private readonly ConditionalWeakTable<object, ActivationEntry> _trackedInstances = new ConditionalWeakTable<object, ActivationEntry>();
+		private readonly ConditionalWeakTable<object, ActivationEntry> trackedInstances = new ConditionalWeakTable<object, ActivationEntry>();
 
 		public WeakTableActivationCache()
 		{
@@ -31,7 +31,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		{
 			get
 			{
-				return _trackedInstances.Count(kvp => !kvp.Value.IsDeactivated);
+				return trackedInstances.Count(kvp => !kvp.Value.IsDeactivated);
 			}
 		}
 
@@ -43,7 +43,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		{
 			get
 			{
-				return _trackedInstances.Count(kvp => kvp.Value.IsDeactivated);
+				return trackedInstances.Count(kvp => kvp.Value.IsDeactivated);
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </summary>
 		public void Clear()
 		{
-			_trackedInstances.Clear();
+			trackedInstances.Clear();
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		{
 			// we don't actually care about the value that may already be in there, but we only
 			// want to create a new one if there isn't one already
-			_trackedInstances.GetValue(instance, inst => new ActivationEntry(inst));
+			trackedInstances.GetValue(instance, inst => new ActivationEntry(inst));
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 			// if the instance has been activated before, then we can just set that entry to deactivated,
 			// otherwise a new activation entry is added - the scenario of deactivating instances that
 			// were not activated before is (probably) only really relevant for tests anyway.
-			_trackedInstances.GetValue(instance, inst => new ActivationEntry(inst)).IsDeactivated = true;
+			trackedInstances.GetValue(instance, inst => new ActivationEntry(inst)).IsDeactivated = true;
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </returns>
 		public bool IsActivated(object instance)
 		{
-			return _trackedInstances.TryGetValue(instance, out var entry) && !entry.IsDeactivated;
+			return trackedInstances.TryGetValue(instance, out var entry) && !entry.IsDeactivated;
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace Ninject.Extensions.DependencyInjection.Components
 		/// </returns>
 		public bool IsDeactivated(object instance)
 		{
-			return _trackedInstances.TryGetValue(instance, out var entry) && entry.IsDeactivated;
+			return trackedInstances.TryGetValue(instance, out var entry) && entry.IsDeactivated;
 		}
 
 		/// <summary>
@@ -112,12 +112,12 @@ namespace Ninject.Extensions.DependencyInjection.Components
 
 		public IActivationEntry GetEntry(object instance)
 		{
-			return _trackedInstances.TryGetValue(instance, out var entry) ? entry : null;
+			return trackedInstances.TryGetValue(instance, out var entry) ? entry : null;
 		}
 
 		public IEnumerable<IActivationEntry> GetAllEntries()
 		{
-			return _trackedInstances.Select(kvp => kvp.Value);
+			return trackedInstances.Select(kvp => kvp.Value);
 		}
 	}
 }

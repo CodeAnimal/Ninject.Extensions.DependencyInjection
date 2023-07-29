@@ -5,7 +5,7 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class BindingIndex
 	{
-		private readonly IDictionary<Type, Item> _bindingIndexMap = new Dictionary<Type, Item>();
+		private readonly IDictionary<Type, Item> bindingIndexMap = new Dictionary<Type, Item>();
 
 		public int Count { get; private set; }
 
@@ -16,34 +16,34 @@ namespace Ninject.Extensions.DependencyInjection
 		public Item Next(Type serviceType)
 		{
 			
-			_bindingIndexMap.TryGetValue(serviceType, out var previous);
+			bindingIndexMap.TryGetValue(serviceType, out var previous);
 
 			var next = new Item(this, serviceType, Count++, previous?.TypeIndex + 1 ?? 0);
-			_bindingIndexMap[serviceType] = next;
+			bindingIndexMap[serviceType] = next;
 
 			return next;
 		}
 
 		private bool IsLatest(Type serviceType, Item item)
 		{
-			return _bindingIndexMap[serviceType] == item;
+			return bindingIndexMap[serviceType] == item;
 		}
 
 		public class Item
 		{
-			private readonly BindingIndex _root;
-			private readonly Type _serviceType;
+			private readonly BindingIndex root;
+			private readonly Type serviceType;
 
 			public int TotalIndex { get; }
 			public int TypeIndex { get; }
 
-			public bool IsLatest => _root.IsLatest(_serviceType, this);
-			public int Precedence => _root.Count - TotalIndex;
+			public bool IsLatest => root.IsLatest(serviceType, this);
+			public int Precedence => root.Count - TotalIndex;
 
 			public Item(BindingIndex root, Type serviceType, int totalIndex, int typeIndex)
 			{
-				_root = root;
-				_serviceType = serviceType;
+				this.root = root;
+				this.serviceType = serviceType;
 				TotalIndex = totalIndex;
 				TypeIndex = typeIndex;
 			}

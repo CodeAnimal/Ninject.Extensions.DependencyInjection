@@ -9,9 +9,7 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class ServiceCollectionAdapter
 	{
-		private readonly IDictionary<Type, BindingIndex> _bindingIndexMap = new Dictionary<Type, BindingIndex>();
-
-		public void Populate(IKernel kernel, IServiceCollection serviceCollection)
+        public void Populate(IKernel kernel, IServiceCollection serviceCollection)
 		{
 			if (serviceCollection == null)
 			{
@@ -37,7 +35,7 @@ namespace Ninject.Extensions.DependencyInjection
 			}
 		}
 
-		private static bool UsedCustomBinding(IKernel kernel, List<IPopulateAdapter> adapters, ServiceDescriptor descriptor)
+		private static bool UsedCustomBinding(IKernel kernel, IEnumerable<IPopulateAdapter> adapters, ServiceDescriptor descriptor)
         {
             return adapters.Any(adapter => adapter.AdaptDescriptor(kernel, descriptor));
         }
@@ -65,7 +63,7 @@ namespace Ninject.Extensions.DependencyInjection
 			else
 			{
 				// use ToMethod here as ToConstant has the wrong return type.
-				result = bindingToSyntax.ToMethod(context => descriptor.ImplementationInstance as T).InSingletonScope();
+				result = bindingToSyntax.ToMethod(_ => descriptor.ImplementationInstance as T).InSingletonScope();
 			}
 
 			return result

@@ -7,11 +7,11 @@ namespace Ninject.Extensions.DependencyInjection
 #if NET6_0_OR_GREATER
 	public class NinjectServiceProviderIsService : IServiceProviderIsService
 	{
-		private readonly IKernel _kernel;
+		private readonly IKernel kernel;
 
 		public NinjectServiceProviderIsService(IKernel kernel)
 		{
-			_kernel = kernel;
+			this.kernel = kernel;
 		}
 
 		public bool IsService(Type serviceType)
@@ -29,7 +29,7 @@ namespace Ninject.Extensions.DependencyInjection
 				return true;
 			}
 
-			return _kernel.CanResolve(serviceType);
+			return kernel.CanResolve(serviceType);
 		}
 	}
 #endif

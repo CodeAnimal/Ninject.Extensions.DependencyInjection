@@ -7,7 +7,7 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
 	{
 		public override void Load()
 		{
-			Kernel.Bind<INinjectSelfHost>().To<AspNetCoreHost>();
+			Kernel!.Bind<INinjectSelfHost>().To<AspNetCoreHost>();
 		}
 	}
 }

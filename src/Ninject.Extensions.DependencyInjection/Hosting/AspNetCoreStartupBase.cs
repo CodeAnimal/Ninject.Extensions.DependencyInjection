@@ -10,11 +10,11 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
     /// </summary>
     public abstract class AspNetCoreStartupBase : IStartup
 	{
-		private readonly IServiceProviderFactory<NinjectServiceProviderBuilder> _providerFactory;
+		private readonly IServiceProviderFactory<NinjectServiceProviderBuilder> providerFactory;
 
 		protected AspNetCoreStartupBase(IServiceProviderFactory<NinjectServiceProviderBuilder> providerFactory)
 		{
-			_providerFactory = providerFactory;
+			this.providerFactory = providerFactory;
 		}
 
 		public abstract void Configure(IApplicationBuilder app);
@@ -25,7 +25,7 @@ namespace Ninject.Extensions.DependencyInjection.Hosting
 
 			ConfigureMvcOptions(mvcBuilder);
 			ConfigureServices(services); // allow to customize the services before conversion to Ninject bindings happen.
-			return _providerFactory.CreateBuilder(services).Build();
+			return providerFactory.CreateBuilder(services).Build();
 		}
 
 		public virtual void ConfigureServices(IServiceCollection services)

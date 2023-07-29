@@ -6,14 +6,14 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class RequestScope : DisposableObject
 	{
-		private static AsyncLocal<RequestScope> _current = new AsyncLocal<RequestScope>();
-		public static RequestScope Current => _current.Value;
+		private static readonly AsyncLocal<RequestScope> current = new();
+		public static RequestScope Current => current.Value;
 
 		public RequestScope()
 		{
-			if (_current.Value == null)
+			if (current.Value == null)
 			{
-				_current.Value = this;
+				current.Value = this;
 			}
 			else
 			{
@@ -25,7 +25,7 @@ namespace Ninject.Extensions.DependencyInjection
 		{
 			if (disposing && !IsDisposed)
 			{
-				_current.Value = null;
+				current.Value = null;
 			}
 
 			base.Dispose(disposing);

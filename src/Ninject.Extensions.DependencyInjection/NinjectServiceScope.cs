@@ -7,11 +7,11 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class NinjectServiceScope : DisposableObject, IServiceScope
 	{
-		private readonly IDisposalManager _disposalManager;
+		private readonly IDisposalManager disposalManager;
 
 		public NinjectServiceScope(IKernel kernel, bool isRootScope)
 		{
-			_disposalManager = kernel.Components.Get<IDisposalManager>();
+			disposalManager = kernel.Components.Get<IDisposalManager>();
 			var resolutionRoot = new ServiceProviderScopeResolutionRoot(kernel, this);
 			ServiceProvider = new NinjectServiceProvider(resolutionRoot, isRootScope ? this : null);
 		}
@@ -24,7 +24,7 @@ namespace Ninject.Extensions.DependencyInjection
 
 		public override void Dispose(bool disposing)
 		{
-			using (_disposalManager.CreateArea())
+			using (disposalManager.CreateArea())
 			{
 				base.Dispose(disposing);
 			}

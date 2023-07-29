@@ -7,11 +7,11 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class AspNetCoreApplicationPlugin : NinjectComponent, INinjectHttpApplicationPlugin
 	{
-		private readonly IKernel _kernel;
+		private readonly IKernel kernel;
 
 		public AspNetCoreApplicationPlugin(IKernel kernel)
 		{
-			_kernel = kernel;
+			this.kernel = kernel;
 		}
 
 		public object GetRequestScope(IContext context)

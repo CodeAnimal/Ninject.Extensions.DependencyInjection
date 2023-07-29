@@ -22,7 +22,7 @@ namespace Ninject.Extensions.DependencyInjection
 		}
 
 		public NetCoreKernel(INinjectSettings settings, params INinjectModule[] modules)
-			: base(settings, modules)
+			: base(settings ?? new NinjectSettings(), modules)
 		{
 			RootScope = new NinjectServiceScope(this, true);
 			Settings.AllowNullInjection = true;
