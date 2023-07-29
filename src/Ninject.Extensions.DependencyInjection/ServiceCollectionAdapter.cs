@@ -18,7 +18,7 @@ namespace Ninject.Extensions.DependencyInjection
             kernel
                 .Bind<IServiceScopeFactory>()
                 .ToConstant((IServiceScopeFactory) kernel);
-            
+
 			var adapters = kernel.GetAll<IPopulateAdapter>().ToList();
 			var bindingIndex = new BindingIndex();
 
@@ -55,8 +55,7 @@ namespace Ninject.Extensions.DependencyInjection
 			}
 			else if (descriptor.ImplementationFactory != null)
 			{
-
-				result = ConfigureLifecycle(bindingToSyntax.ToMethod(context
+                result = ConfigureLifecycle(bindingToSyntax.ToMethod(context
 					=>
 				{
 					var provider = context.Kernel.Get<IServiceProvider>();
