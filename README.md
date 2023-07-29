@@ -8,9 +8,11 @@ This project provides full [Ninject](https://github.com/ninject/Ninject) integra
 
 * Ninject.Extensions.DependencyInject
 * Ninject.Extensions.DependencyInjection.AspNetCore - this is only required if you use `.InRequestScope()`.
-~~~~
-# Configuration
-```cs
+
+# Examples
+
+## Simple Program.cs
+```csharp
 using Microsoft.AspNetCore.Builder;
 using Ninject.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,4 +41,31 @@ app.UseRouting()
     .UseEndpoints(endpoints => endpoints.MapControllers());
 
 await app.RunAsync().ConfigureAwait(false);
+```
+
+## With Startup.cs file
+```csharp
+public class Startup
+{
+    public static void Configure(IApplicationBuilder app)
+    {
+        app.UseRouting()
+           .UseEndpoints(endpoints => endpoints.MapControllers());
+    }
+
+    public static void ConfigureServices(IServiceCollection services)
+    {
+        // ServiceCollection Binding here
+        // builder.Services
+        //    .AddTransient<IServiceB, ServiceB>();
+        
+        services.AddMvc();
+    }
+
+    public static void ConfigureContainer(IKernel builder)
+    {
+	    // Ninject Binding here
+        // kernel.Bind<IServiceA>().To<ServiceA>();
+    }
+}
 ```
