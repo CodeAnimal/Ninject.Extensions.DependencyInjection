@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Ninject.Extensions.DependencyInjection.Hosting;
 
 namespace Ninject.Extensions.DependencyInjection
 {
@@ -24,7 +23,6 @@ namespace Ninject.Extensions.DependencyInjection
 		public IKernel CreateBuilder(IServiceCollection services)
         {
             var kernel = new NetCoreKernel(ninjectSettings ?? new NinjectSettings());
-            EnsureAspNetCoreModuleLoaded(kernel);
             
 			var adapter = new ServiceCollectionAdapter();
 			adapter.Populate(kernel, services);
@@ -42,13 +40,5 @@ namespace Ninject.Extensions.DependencyInjection
 			
 			return builder.Build();
 		}
-
-        private static void EnsureAspNetCoreModuleLoaded(IKernel kernel)
-        {
-            if (!kernel.HasModule(typeof(AspNetCoreModule).FullName!))
-            {
-                kernel.Load<AspNetCoreModule>();
-            }
-        }
     }
 }

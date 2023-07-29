@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ninject.Syntax;
-using Ninject.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,10 @@ namespace Ninject.Extensions.DependencyInjection
 				throw new ArgumentNullException(nameof(serviceCollection));
 			}
 
+            kernel
+                .Bind<IServiceScopeFactory>()
+                .ToConstant((IServiceScopeFactory) kernel);
+            
 			var adapters = kernel.GetAll<IPopulateAdapter>().ToList();
 			var bindingIndex = new BindingIndex();
 
@@ -82,14 +85,15 @@ namespace Ninject.Extensions.DependencyInjection
 					// and/or the root IServiceProvider is disposed.
 					return bindingInSyntax.InScope(context => ((NetCoreKernel)context.Kernel).RootScope);
 				case ServiceLifetime.Scoped:
-					return bindingInSyntax.InRequestScope();
+                    return bindingInSyntax.InScope(context => {
+                        var scope = context.Parameters.OfType<ServiceProviderScopeParameter>().SingleOrDefault();
+                        return scope?.GetValue(context, null);
+                    });
 				case ServiceLifetime.Transient:
-					// Microsoft.Extensions.DependencyInjection expects transient services to be disposed when the IServiceScope
-					// in which they were created is disposed. See the compliance tests for more details.
-					return bindingInSyntax.InScope(context => {
-						var scope = context.Parameters.OfType<ServiceProviderScopeParameter>().SingleOrDefault();
-						return scope?.DeriveTransientScope();
-					});
+                    return bindingInSyntax.InScope(context => {
+                        var scope = context.Parameters.OfType<ServiceProviderScopeParameter>().SingleOrDefault();
+                        return scope?.DeriveTransientScope();
+                    });
 				default:
 					throw new NotSupportedException();
 			}
