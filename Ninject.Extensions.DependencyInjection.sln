@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Dependen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Net7", "test\Integration.Net7\Integration.Net7.csproj", "{313D51A5-BA90-4611-B4FE-EEF78C8485CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyInjection.AspNetCore", "src\Ninject.Extensions.DependencyInjection.AspNetCore\Ninject.Extensions.DependencyInjection.AspNetCore.csproj", "{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{313D51A5-BA90-4611-B4FE-EEF78C8485CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{313D51A5-BA90-4611-B4FE-EEF78C8485CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313D51A5-BA90-4611-B4FE-EEF78C8485CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +78,6 @@ Global
 		{EF979E32-AF72-4B20-B5F0-37160074EE8F} = {C04A967C-A1FA-486B-AEEC-83C9FCFFE709}
 		{936E3A30-4E1C-4CE6-A561-A22827E6E136} = {C04A967C-A1FA-486B-AEEC-83C9FCFFE709}
 		{313D51A5-BA90-4611-B4FE-EEF78C8485CF} = {C04A967C-A1FA-486B-AEEC-83C9FCFFE709}
+		{7AAED8FE-54C6-4481-9B7A-FEADBF3799B2} = {7CD21301-1E19-44AD-A9C9-178F9418849C}
 	EndGlobalSection
 EndGlobal

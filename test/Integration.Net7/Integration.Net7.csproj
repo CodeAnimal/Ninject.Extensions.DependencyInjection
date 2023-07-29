@@ -10,6 +10,7 @@
     <LangVersion>11</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Ninject.Extensions.DependencyInjection.AspNetCore\Ninject.Extensions.DependencyInjection.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\Ninject.Extensions.DependencyInjection\Ninject.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,9 @@
-﻿using Ninject.Activation;
+﻿using System.Linq;
+using Ninject.Activation;
 using Ninject.Components;
 using Ninject.Web.Common;
-using System.Linq;
 
-namespace Ninject.Extensions.DependencyInjection
+namespace Ninject.Extensions.DependencyInjection.AspNetCore
 {
 	public class AspNetCoreApplicationPlugin : NinjectComponent, INinjectHttpApplicationPlugin
 	{
@@ -21,7 +21,7 @@ namespace Ninject.Extensions.DependencyInjection
 			// from IServiceProvider with scoped services.
 			var scope = context.Parameters.OfType<ServiceProviderScopeParameter>().SingleOrDefault()?.GetValue(context, null);
 			// returns the currently active request scope. Used when binding with scope InRequestScope.
-			return scope ?? RequestScope.Current ?? throw new ActivationException("Trying to activate a service InRequestScope without a request scope present");
+			return scope ?? throw new ActivationException("Trying to activate a service InRequestScope without a request scope present");
 		}
 
 		// start is called after kernel is completely configured by the bootstrapper.
