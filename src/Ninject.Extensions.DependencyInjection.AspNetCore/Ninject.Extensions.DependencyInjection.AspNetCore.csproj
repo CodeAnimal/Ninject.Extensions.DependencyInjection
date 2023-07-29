@@ -4,15 +4,20 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <ImplicitUsings>false</ImplicitUsings>
-        <Authors>CodeAnimal</Authors>
-        <Copyright>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</Copyright>
-        <RepositoryUrl>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>../../Ninject.Extensions.DependencyInjection.snk</AssemblyOriginatorKeyFile>
         <Configurations>Debug;Release</Configurations>
 
+        <PackageId>Ninject.Extensions.DependencyInjection.AspNetCore</PackageId>
+        <PackageTags>Ninject, DependencyInjection, ServiceProviderFactory, AspNetCore</PackageTags>
+        <Authors>CodeAnimal</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
@@ -27,7 +32,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
