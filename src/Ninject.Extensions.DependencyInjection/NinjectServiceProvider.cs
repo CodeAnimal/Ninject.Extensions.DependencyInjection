@@ -44,6 +44,7 @@ namespace Ninject.Extensions.DependencyInjection
         public void Dispose()
         {
 			scope?.Dispose();
+            GC.SuppressFinalize(this);
 		}
 	}
 }
