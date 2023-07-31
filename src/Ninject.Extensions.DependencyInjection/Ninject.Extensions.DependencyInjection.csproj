@@ -7,7 +7,7 @@
     <Configurations>Debug;Release</Configurations>
 
     <PackageId>Ninject.Extensions.DependencyInjection</PackageId>
-    <PackageTags>Ninject, DependencyInjection, ServiceProviderFactory</PackageTags>
+    <PackageTags>Ninject, DependencyInjection, ServiceProviderFactory, ServiceProvider</PackageTags>
     <Authors>CodeAnimal</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/CodeAnimal/Ninject.Extensions.DependencyInjection</PackageProjectUrl>
