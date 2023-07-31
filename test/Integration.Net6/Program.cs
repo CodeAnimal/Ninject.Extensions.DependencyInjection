@@ -1,16 +1,14 @@
-using System.Threading.Tasks;
-using Ninject.Extensions.DependencyInjection;
+using Integration.Net6;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Ninject.Extensions.DependencyInjection;
 
-namespace Integration.Net6;
+var builder = Host.CreateDefaultBuilder(args);
 
-public static class Program
-{
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .UseServiceProviderFactory(new NinjectServiceProviderFactory())
-            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+builder
+    .UseServiceProviderFactory(new NinjectServiceProviderFactory())
+    .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 
-    public static async Task Main(string[] args) => await CreateHostBuilder(args).Build().RunAsync().ConfigureAwait(false);
-}
+var app = builder.Build();
+
+await app.RunAsync().ConfigureAwait(false);

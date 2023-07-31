@@ -1,9 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using Integration.Net6.Services;
 using Integration.Net6.Services.Abstractions;
-using Ninject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Ninject;
 
 namespace Integration.Net6;
 
