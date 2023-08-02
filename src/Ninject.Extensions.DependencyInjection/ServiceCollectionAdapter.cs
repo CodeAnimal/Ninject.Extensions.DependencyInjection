@@ -8,7 +8,7 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class ServiceCollectionAdapter
 	{
-        public void Populate(IKernel kernel, IServiceCollection serviceCollection)
+        public void Populate(IServiceScopeFactoryKernel kernel, IServiceCollection serviceCollection)
 		{
 			if (serviceCollection == null)
 			{
@@ -17,7 +17,7 @@ namespace Ninject.Extensions.DependencyInjection
 
             kernel
                 .Bind<IServiceScopeFactory>()
-                .ToConstant((IServiceScopeFactory) kernel);
+                .ToConstant(kernel);
 
 			var adapters = kernel.GetAll<IPopulateAdapter>().ToList();
 			var bindingIndex = new BindingIndex();
@@ -82,7 +82,7 @@ namespace Ninject.Extensions.DependencyInjection
 				case ServiceLifetime.Singleton:
 					// Microsoft.Extensions.DependencyInjection expects its singletons to be disposed when the root service scope
 					// and/or the root IServiceProvider is disposed.
-					return bindingInSyntax.InScope(context => ((NetCoreKernel)context.Kernel).RootScope);
+					return bindingInSyntax.InScope(context => ((IServiceScopeKernel)context.Kernel).RootScope);
 				case ServiceLifetime.Scoped:
                     return bindingInSyntax.InScope(context => {
                         var scope = context.Parameters.OfType<ServiceProviderScopeParameter>().SingleOrDefault();

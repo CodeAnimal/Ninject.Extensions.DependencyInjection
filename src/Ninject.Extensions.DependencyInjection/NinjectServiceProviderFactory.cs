@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Ninject.Extensions.DependencyInjection
 {
-	public class NinjectServiceProviderFactory : IServiceProviderFactory<IKernel>
+	public class NinjectServiceProviderFactory : IServiceProviderFactory<IServiceScopeKernel>
 	{
 		private readonly Action<IKernel> configurationAction;
         private readonly INinjectSettings ninjectSettings;
@@ -20,7 +20,7 @@ namespace Ninject.Extensions.DependencyInjection
             this.configurationAction = configurationAction ?? (_ => { });
         }
 
-		public IKernel CreateBuilder(IServiceCollection services)
+		public IServiceScopeKernel CreateBuilder(IServiceCollection services)
         {
             var kernel = new NetCoreKernel(ninjectSettings ?? new NinjectSettings());
             
@@ -32,11 +32,11 @@ namespace Ninject.Extensions.DependencyInjection
 			return kernel;
 		}
 
-        public IServiceProvider CreateServiceProvider(IKernel containerBuilder)
+        public IServiceProvider CreateServiceProvider(IServiceScopeKernel containerBuilder)
 		{
 			if (containerBuilder == null) throw new ArgumentNullException(nameof(containerBuilder));
 			
-			var builder = new NinjectServiceProviderBuilder((NetCoreKernel) containerBuilder);
+			var builder = new NinjectServiceProviderBuilder(containerBuilder);
 			
 			return builder.Build();
 		}

@@ -16,7 +16,7 @@ namespace Ninject.Extensions.DependencyInjection
 		/// <returns>The service collection.</returns>
 		public static IServiceCollection AddNinject(this IServiceCollection services, Action<IKernel> configurationAction = null)
 		{
-			return services.AddSingleton<IServiceProviderFactory<IKernel>>(new NinjectServiceProviderFactory(configurationAction));
+			return services.AddSingleton<IServiceProviderFactory<IServiceScopeKernel>>(new NinjectServiceProviderFactory(configurationAction));
 		}
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Ninject.Extensions.DependencyInjection
         /// <returns>The service collection.</returns>
         public static IServiceCollection AddNinject(this IServiceCollection services, INinjectSettings ninjectSettings, Action<IKernel> configurationAction = null)
 		{
-			return services.AddSingleton<IServiceProviderFactory<IKernel>>(new NinjectServiceProviderFactory(ninjectSettings, configurationAction));
+			return services.AddSingleton<IServiceProviderFactory<IServiceScopeKernel>>(new NinjectServiceProviderFactory(ninjectSettings, configurationAction));
 		}
 	}
 }

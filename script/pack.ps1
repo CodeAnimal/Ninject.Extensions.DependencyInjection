@@ -1,1 +1,0 @@
-dotnet pack -c Release --output ./nupkgs /p:PackageVersion=1.0.0-beta /p:ContinuousIntegrationBuild=true

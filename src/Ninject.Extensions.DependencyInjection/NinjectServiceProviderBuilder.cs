@@ -6,9 +6,9 @@ namespace Ninject.Extensions.DependencyInjection
 {
 	public class NinjectServiceProviderBuilder
 	{
-		private readonly NetCoreKernel kernel;
+		private readonly IServiceScopeKernel kernel;
 
-		public NinjectServiceProviderBuilder(NetCoreKernel kernel)
+		public NinjectServiceProviderBuilder(IServiceScopeKernel kernel)
 		{
 			this.kernel = kernel;
 		}

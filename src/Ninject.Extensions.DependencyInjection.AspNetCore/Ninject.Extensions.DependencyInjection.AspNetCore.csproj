@@ -20,6 +20,7 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -33,10 +34,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>

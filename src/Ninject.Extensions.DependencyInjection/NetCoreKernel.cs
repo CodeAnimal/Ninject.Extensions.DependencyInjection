@@ -10,15 +10,13 @@ using Ninject.Extensions.DependencyInjection.Components;
 
 namespace Ninject.Extensions.DependencyInjection
 {
-	public class NetCoreKernel : StandardKernel, IServiceScopeFactory
+	public class NetCoreKernel : StandardKernel, IServiceScopeFactoryKernel, IServiceScopeKernel
 	{
 		public IServiceScope RootScope { get; }
 
 		public NetCoreKernel(params INinjectModule[] modules)
-			: base(modules)
+			: this(null, modules)
 		{
-			RootScope = new NinjectServiceScope(this, true);
-			Settings.AllowNullInjection = true;
 		}
 
 		public NetCoreKernel(INinjectSettings settings, params INinjectModule[] modules)

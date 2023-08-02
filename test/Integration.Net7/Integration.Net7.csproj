@@ -8,6 +8,7 @@
     <Nullable>enable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <LangVersion>11</LangVersion>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ninject.Extensions.DependencyInjection.AspNetCore\Ninject.Extensions.DependencyInjection.AspNetCore.csproj" />
