@@ -2,7 +2,7 @@
 Build and package the project with the  _Release_ configuration.
 
 ```
-$version = "1.0.1"
+$version = "1.0.2"
 dotnet pack Ninject.Extensions.DependencyInjection.sln -c Release --output ./nupkgs /p:PackageVersion=$version /p:ContinuousIntegrationBuild=true
 ```
 
